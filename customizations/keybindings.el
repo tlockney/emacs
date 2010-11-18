@@ -32,3 +32,6 @@
 ;(global-set-key "\C-w" 'backward-kill-word)
 (global-set-key "\C-x\C-k" 'kill-region)
 (global-set-key "\C-c\C-k" 'kill-region)
+
+; use apple-F for fullscreen
+(global-set-key [(super F)] 'ns-toggle-fullscreen)
