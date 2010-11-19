@@ -29,5 +29,3 @@
 (if (string-equal system-type "gnu/linux")
     (mapcar 'load-directory '("~/.emacs.d/linux-customizations"))
     (mapcar 'load-directory '("~/.emacs.d/mac-customizations")))
-
-(eshell)
