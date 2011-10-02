@@ -13,7 +13,7 @@
 ; scala
 (require 'scala-mode)
 (add-to-list 'auto-mode-alist '("\\.scala$" . scala-mode))
-(add-to-list 'load-path "~/.emacs.d/vendor/ensime/dist/elisp/")
+(add-to-list 'load-path "~/.emacs.d/vendor/ensime/elisp/")
 (require 'ensime)
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
@@ -27,7 +27,6 @@
 ;(setq ido-use virtual-buffers t)
 
 ; Haskell
-(load "~/.emacs.d/vendor/haskellmode-emacs/haskell-site-file")
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 
