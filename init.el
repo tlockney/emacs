@@ -4,6 +4,29 @@
              '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (package-initialize)
 
+(when (not package-archive-contents)
+      (package-refresh-contents))
+
+(defvar my-packages `(caml
+                      clojure-mode
+                      coffee-mode
+                      haskell-mode
+                      ipython
+                      magit
+                      magithub
+                      markdown-mode
+                      python
+                      python-mode
+                      rvm
+                      slime
+                      slime-clj
+                      slime-repl
+                      tuareg
+                      virtualenv))
+(dolist (p my-packages)
+        (when (not (package-installed-p p))
+              (package-install p)))
+
 (push "/usr/local/bin" exec-path)
 
 ; add to load path
