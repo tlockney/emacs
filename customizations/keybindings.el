@@ -40,8 +40,5 @@
 (global-set-key (kbd "C-0") 'delete-window) ; was digit-argument
 (global-set-key (kbd "C-o") 'other-window) ; was facemenu-keymap
 
-; use apple-F for fullscreen
-;;(global-set-key [(super F)] 'ns-toggle-fullscreen)
-
 ; iBuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)

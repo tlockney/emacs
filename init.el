@@ -19,14 +19,11 @@
 (vendor 'color-theme)
 (vendor 'color-theme-solarized)
 (vendor 'gambit)
-(vendor 'tuareg)
-(vendor 'markdown-mode)
-(vendor 'magit)
 (vendor 'full-ack)
 
 (add-to-list 'load-path "~/.emacs.d/vendor/scala")
-(add-to-list 'load-path "~/.emacs.d/vendor/haskellmode-emacs")
-(add-to-list 'load-path "~/.emacs.d/vendor/ensime")
+;(add-to-list 'load-path "~/.emacs.d/vendor/haskellmode-emacs")
+(add-to-list 'load-path "~/.emacs.d/vendor/ensime/dist")
 
 (mapcar 'load-directory '("~/.emacs.d/customizations"))
 
