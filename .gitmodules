@@ -1,3 +1,6 @@
 [submodule "vendor/twilight-emacs"]
 	path = vendor/twilight-emacs
 	url = http://github.com/crafterm/twilight-emacs.git
+[submodule "vendor/color-theme-solarized"]
+	path = vendor/color-theme-solarized
+	url = https://github.com/sellout/emacs-color-theme-solarized.git
