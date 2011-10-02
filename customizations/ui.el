@@ -20,27 +20,52 @@
 (require 'linum)
 (global-linum-mode 1)
 ; optional formatting to make line numbers prettier
-(setq linum-format "%d ")
+(setq linum-format " %d ")
 
 ; theme
+;; (require 'color-theme)
+;; (color-theme-initialize)
+;; (eval-after-load 'color-theme
+;;   (progn (color-theme-initialize)
+;; 	 (color-theme-charcoal-black)
+;; 	 (set-face-background 'region "#555555")))
+;; ;(setq color-theme-is-global t)
+;; ;(load-file "~/.emacs.d/vendor/twilight-emacs/color-theme-twilight.el")
+;; ;(color-theme-twilight)
+;;(if window-system (color-theme-solarized-dark))
+
 (require 'color-theme)
 (color-theme-initialize)
-(eval-after-load 'color-theme
-  (progn (color-theme-initialize)
-	 (color-theme-charcoal-black)
-	 (set-face-background 'region "#555555")))
-;(setq color-theme-is-global t)
-;(load-file "~/.emacs.d/vendor/twilight-emacs/color-theme-twilight.el")
-;(color-theme-twilight)
 
 ; colors
-(custom-set-faces
-  '(flymake-errline ((t :underline "red")))
-  '(flymake-warnline ((t :underline "green"))))
+;; (custom-set-faces
+;;   '(flymake-errline ((t :underline "red")))
+;;   '(flymake-warnline ((t :underline "green"))))
 
-; Default font is Deja Vu Sans Mono, 18pt.
-(if (string-equal system-type "gnu/linux")
-  (set-default-font "-unknown-DejaVu Sans Mono-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")
-  (set-default-font "-apple-deja vu sans mono-medium-r-normal--14-140-72-72-m-140-iso10646-1"))
+(defvar after-make-console-frame-hooks '()
+"Hooks to run after creating a new TTY frame")
+(defvar after-make-window-system-frame-hooks '()
+"Hooks to run after creating a new window-system frame")
 
+(defun run-after-make-frame-hooks (frame)
+"Selectively run either `after-make-console-frame-hooks' or
+`after-make-window-system-frame-hooks'"
+  (select-frame frame)
+  (run-hooks (if window-system
+               'after-make-window-system-frame-hooks
+               'after-make-console-frame-hooks)))
 
+(add-hook 'after-make-frame-functions 'run-after-make-frame-hooks)
+(add-hook 'after-init-hook (lambda ()
+  (run-after-make-frame-hooks (selected-frame))))
+
+(add-hook 'after-make-window-system-frame-hooks
+          '(lambda ()
+             (color-theme-solarized-dark)
+             (if (string-equal system-type "gnu/linux")
+                 (set-default-font "-unknown-DejaVu Sans Mono-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")
+                 (set-default-font "-apple-deja vu sans mono-medium-r-normal--14-140-72-72-m-140-iso10646-1"))))
+
+(add-hook 'after-make-console-frame-hooks
+          '(lambda ()
+             (color-theme-charcoal-black)))

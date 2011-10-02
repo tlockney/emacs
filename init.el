@@ -1,12 +1,8 @@
-;;; This was installed by package-install.el.
-;;; This provides support for the package system and
-;;; interfacing with ELPA, the package archive.
-;;; Move this code earlier if you want to reference
-;;; packages in your .emacs.
-(when
-    (load
-     (expand-file-name "~/.emacs.d/elpa/package.el"))
-  (package-initialize))
+; marmalade
+(require 'package)
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/") t)
+(package-initialize)
 
 (push "/usr/local/bin" exec-path)
 
@@ -21,8 +17,16 @@
 (mapcar 'load-directory '("~/.emacs.d/utilities"))
 
 (vendor 'color-theme)
+(vendor 'color-theme-solarized)
+(vendor 'gambit)
+(vendor 'tuareg)
+(vendor 'markdown-mode)
+(vendor 'magit)
+(vendor 'full-ack)
 
 (add-to-list 'load-path "~/.emacs.d/vendor/scala")
+(add-to-list 'load-path "~/.emacs.d/vendor/haskellmode-emacs")
+(add-to-list 'load-path "~/.emacs.d/vendor/ensime")
 
 (mapcar 'load-directory '("~/.emacs.d/customizations"))
 

@@ -19,9 +19,9 @@
 (global-set-key "\033[5C" 'other-window)
 
 ;; Faster point movement
-(global-set-key "\M-\C-p" 
+(global-set-key "\M-\C-p"
   '(lambda () (interactive) (previous-line 5)))
-(global-set-key "\M-\C-n" 
+(global-set-key "\M-\C-n"
   '(lambda () (interactive) (next-line 5)))
 
 ; easier access to commands
@@ -33,5 +33,15 @@
 (global-set-key "\C-x\C-k" 'kill-region)
 (global-set-key "\C-c\C-k" 'kill-region)
 
+; quick splits
+(global-set-key (kbd "C-9") 'split-window-horizontally) ; was digit-argument
+(global-set-key (kbd "C-8") 'split-window-vertically) ; was digit-argument
+(global-set-key (kbd "C-1") 'delete-other-windows) ; was digit-argument
+(global-set-key (kbd "C-0") 'delete-window) ; was digit-argument
+(global-set-key (kbd "C-o") 'other-window) ; was facemenu-keymap
+
 ; use apple-F for fullscreen
-(global-set-key [(super F)] 'ns-toggle-fullscreen)
+;;(global-set-key [(super F)] 'ns-toggle-fullscreen)
+
+; iBuffer
+(global-set-key (kbd "C-x C-b") 'ibuffer)
