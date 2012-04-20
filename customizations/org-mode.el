@@ -16,11 +16,67 @@
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+datetree "~/Dropbox/org/todo.org" "Tasks")
-         "* TODO %^{Description}\n%?\n")
-        ("b" "BankSimple Todo" entry (file+datetree "~/Dropbox/org/todo.org" "BankSimple Tasks")
+      '(
+        ("t" "Todo" entry (file+datetree "~/Dropbox/org/todo.org" "Tasks")
          "* TODO %^{Description}\n%?\n")
         ("j" "Journal" entry (file+datetree "~/Dropbox/org/journal.org")
          "* %?\n  Entered on %U\n  %i\n  %a")
-        )
+       )
 )
+
+(defadvice org-capture-finalize (after delete-capture-frame activate)
+  "Advise capture-finalize to close the frame if it is the capture frame"
+  (if (equal "capture" (frame-parameter nil 'name))
+      (delete-frame))
+)
+
+(defadvice org-capture-destroy (after delete-capture-frame activate)
+  "Advise capture-destroy to close the frame if it is the capture frame"
+  (if (equal "capture" (frame-parameter nil 'name))
+      (delete-frame))
+)
+
+(defadvice org-switch-to-buffer-other-window (after delete-other-none-org-window activate)
+  "Advise org-switch-to-buffer-other-window to close other windows after creation"
+  (message "testing")
+  (switch-to-buffer buffer)
+)
+
+(defadvice org-protocol-check-filename-for-protocol (around tp/org-protocol-make-frame activate)
+ "Advice org-protocol-check-filename-for-protocol to open windows in new frames."
+ (flet ((org-switch-to-buffer-other-window (&rest args) ; for org-mks
+           (let ((pop-up-frames t))
+             (apply 'switch-to-buffer-other-window args)))
+        (org-pop-to-buffer-same-window (&rest args)  ; for org-capture
+           (let ((pop-up-frames t))
+             (apply 'switch-to-buffer-other-window args))))
+   (let ((display-buffer-mark-dedicated t))
+     ad-do-it)))
+
+(defun make-capture-frame ()
+  "Create a new frame and run org-capture."
+  (interactive)
+  (make-frame '((name . "Orgmode Capture")
+                (width . 100)
+                (height . 15)))
+  (select-frame-by-name "Orgmode Capture")
+  (org-capture)
+)
+
+; babel config
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((R . t)
+   (emacs-lisp . t)
+   (haskell . t)
+   (gnuplot . t)
+   (js . t)
+   (java . t)
+   (lisp . t)
+   (ocaml . t)
+   (python . t)
+   (ruby . t)
+   (ditaa . t)
+   (dot . t)
+   (clojure . t)
+   ))

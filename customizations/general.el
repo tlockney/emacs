@@ -1,3 +1,14 @@
+;prompts - see http://www.masteringemacs.org/articles/2010/11/14/disabling-prompts-emacs/
+(fset 'yes-or-no-p 'y-or-n-p)
+(setq confirm-nonexistent-file-or-buffer nil)
+(setq kill-buffer-query-functions
+  (remq 'process-kill-buffer-query-function
+         kill-buffer-query-functions))
+
+; tramp
+(require 'tramp)
+(setq tramp-default-method "scp")
+
 ; ido mode stuff
 (ido-mode t)
 (setq ido-enable-flex-matching t)
@@ -11,9 +22,7 @@
 (setq ido-file-extensions-order
       '(".org" ".txt" ".scala" ".rb" ".py" ".el" ".cfg"))
 
-
 ;(desktop-save-mode 1)
-
 
 (setq make-backup-files nil) ;; do not make backup files
 (setq auto-save-default nil) ;; do not auto-save!
@@ -24,12 +33,6 @@
       '(("default"
          ("Org"
           (mode . org-mode))
-         ("Ombudsman"
-          (filename . "Development/Banksimple/ombudsman"))
-         ("Goalkeeper"
-          (filename . "Development/Banksimple/goalkeeper"))
-         ("BankSimple dev"
-          (filename . "Development/Banksimple"))
          ("Development"
           (filename . "Development"))
          ("Help" (or (name . "\*Help\*")
@@ -43,6 +46,11 @@
 (setq ibuffer-expert t)
 (setq ibuffer-show-empty-filter-groups nil)
 
-
-
-
+; open quick frame for one-off stuff
+(defun make-quick-frame ()
+  "Creates a new frame intended to be triggered by an external emacsclient command."
+  (make-frame '((name . "Quickie")
+                (width . 100)
+                (height . 30)))
+  (select-frame-by-name "Quickie")
+  (switch-to-buffer "Quickie"))

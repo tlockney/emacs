@@ -1,4 +1,4 @@
-; open file
+;open file
 (global-set-key [(super o)] 'find-file)
 
 ; close window
@@ -28,7 +28,7 @@
 (global-set-key "\C-x\C-m" 'execute-extended-command)
 (global-set-key "\C-c\C-m" 'execute-extended-command)
 
-; delete more easily
+;delete more easily
 ;(global-set-key "\C-w" 'backward-kill-word)
 (global-set-key "\C-x\C-k" 'kill-region)
 (global-set-key "\C-c\C-k" 'kill-region)
@@ -42,3 +42,10 @@
 
 ; iBuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+
+; magit
+; (global-set-key "\S-g" 'magit-status)
+
+; show kill buffer
+(global-set-key "\C-c\C-y"
+  '(lambda () (interactive) (popup-menu 'yank-menu)))

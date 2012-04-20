@@ -13,7 +13,6 @@
                       haskell-mode
                       ipython
                       magit
-                      magithub
                       markdown-mode
                       python
                       python-mode
@@ -28,6 +27,7 @@
               (package-install p)))
 
 (push "/usr/local/bin" exec-path)
+(push "~/bin" exec-path)
 
 ; add to load path
 (add-to-list 'load-path "~/.emacs.d")
@@ -46,6 +46,7 @@
 
 (add-to-list 'load-path "~/.emacs.d/vendor/scala")
 (add-to-list 'load-path "~/.emacs.d/vendor/ensime")
+(add-to-list 'load-path "~/.emacs.d/vendor/emacs-color-theme-solarized")
 
 (mapcar 'load-directory '("~/.emacs.d/customizations"))
 

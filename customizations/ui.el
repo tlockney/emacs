@@ -23,8 +23,6 @@
 (setq linum-format " %d ")
 
 ; theme
-;; (require 'color-theme)
-;; (color-theme-initialize)
 ;; (eval-after-load 'color-theme
 ;;   (progn (color-theme-initialize)
 ;; 	 (color-theme-charcoal-black)
@@ -35,7 +33,11 @@
 ;;(if window-system (color-theme-solarized-dark))
 
 (require 'color-theme)
-(color-theme-initialize)
+(add-to-list 'custom-theme-load-path "~/.emacs.d/vendor/emacs-color-theme-solarized/")
+;; (load-theme 'solarized-dark t)
+;; (setq solarized-termcolors 256)
+;; (setq solarized-degrade t)
+
 
 ; colors
 ;; (custom-set-faces
@@ -61,11 +63,13 @@
 
 (add-hook 'after-make-window-system-frame-hooks
           '(lambda ()
-             (color-theme-solarized-dark)
+             ;(color-theme-solarized-dark)
+             (load-theme 'solarized-dark t)
              (if (string-equal system-type "gnu/linux")
                  (set-default-font "-unknown-DejaVu Sans Mono-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")
                  (set-default-font "-apple-deja vu sans mono-medium-r-normal--14-140-72-72-m-140-iso10646-1"))))
 
-(add-hook 'after-make-console-frame-hooks
-          '(lambda ()
-             (color-theme-charcoal-black)))
+;; (add-hook 'after-make-console-frame-hooks
+;;           '(lambda ()
+;;              (color-theme-solarized-dark)
+;;              ))

@@ -1,3 +1,8 @@
+; mouse support for console mode
+(xterm-mouse-mode t)
+(mouse-wheel-mode t)
+
+
 ; Git
 (require 'magit)
 (autoload 'magit-status "magit" nil t)
