@@ -1,7 +1,13 @@
 ; mouse support for console mode
 (xterm-mouse-mode t)
 (mouse-wheel-mode t)
-
+(unless window-system
+  (global-set-key [mouse-4] '(lambda ()
+                               (interactive)
+                               (scroll-down 1)))
+  (global-set-key [mouse-5] '(lambda ()
+                               (interactive)
+                               (scroll-up 1))))
 
 ; Git
 (require 'magit)
@@ -28,6 +34,10 @@
 (setq auto-mode-alist
       (cons '("\\.md" . markdown-mode) auto-mode-alist))
 
+; asciidoc
+(add-to-list 'load-path "~/.emacs.d/vendor/doc-mode-1.1/")
+(autoload 'doc-mode "doc-mode" nil t)
+
 ;; ido-mode stuff
 ;(setq ido-use virtual-buffers t)
 
@@ -39,8 +49,14 @@
 (require 'gambit)
 
 ; tuareg
-(add-to-list 'auto-mode-alist '("\\.ml[iylp]?" . tuareg-mode))
-(autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
-(autoload 'camldebug "camldebug" "Run the Caml debugger" t)
-(dolist (ext '(".cmo" ".cmx" ".cma" ".cmxa" ".cmi"))
-  (add-to-list 'completion-ignored-extensions ext))
+;(add-to-list 'auto-mode-alist '("\\.ml[iylp]?" . tuareg-mode))
+;(autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
+;(autoload 'camldebug "camldebug" "Run the Caml debugger" t)
+;(dolist (ext '(".cmo" ".cmx" ".cma" ".cmxa" ".cmi"))
+;  (add-to-list 'completion-ignored-extensions ext))
+
+; sml-mode
+(add-to-list 'load-path "~/.emacs.d/vendor/sml-mode-4.1")
+(autoload 'sml-mode "sml-mode" "Major mode for editing SML." t)
+(autoload 'run-sml "sml-proc" "Run an inferior SML process." t)
+;(add-to-list 'auto-mode-alist '("\\.\\(sml\\|sig\\)\\'" . sml-mode)
