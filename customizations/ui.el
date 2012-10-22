@@ -16,11 +16,15 @@
 ; highlight current line
 (global-hl-line-mode t)
 
-; enable line numbers
+; enable line and column numbers
 (require 'linum)
 (global-linum-mode 1)
 ; optional formatting to make line numbers prettier
-(setq linum-format " %d ")
+(setq linum-format "  %d ")
+
+; enable windmove for easilly moving between windows
+(when (fboundp 'windmove-default-keybindings)
+      (windmove-default-keybindings))
 
 ; theme
 ;; (eval-after-load 'color-theme
@@ -37,7 +41,6 @@
 ;; (load-theme 'solarized-dark t)
 ;; (setq solarized-termcolors 256)
 ;; (setq solarized-degrade t)
-
 
 ; colors
 ;; (custom-set-faces
