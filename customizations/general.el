@@ -1,3 +1,9 @@
+(setq scroll-step 1)
+(scroll-lock-mode 1)
+(show-paren-mode 1)
+(global-hl-line-mode 1)
+(cua-mode 1)
+
 ;prompts - see http://www.masteringemacs.org/articles/2010/11/14/disabling-prompts-emacs/
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq confirm-nonexistent-file-or-buffer nil)
@@ -22,10 +28,17 @@
 (setq ido-file-extensions-order
       '(".org" ".txt" ".scala" ".rb" ".py" ".el" ".cfg"))
 
-;(desktop-save-mode 1)
-
 (setq make-backup-files nil) ;; do not make backup files
 (setq auto-save-default nil) ;; do not auto-save!
+;; purge buffers that haven't been opened in 3 days
+(require 'midnight)
+(setq midnight-mode 't)
+;; make buffer names unique
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
+
+(setq initial-scratch-message "")
+
 
 ; iBuffer config
 (setq ibuffer-display-summary nil)
